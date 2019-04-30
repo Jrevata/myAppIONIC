@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
+import { CommonService } from '../services/common.service';
 
 @NgModule({
   imports: [
@@ -14,4 +15,16 @@ import { Tab3Page } from './tab3.page';
   ],
   declarations: [Tab3Page]
 })
-export class Tab3PageModule {}
+export class Tab3PageModule {
+
+  msg : string;
+
+  constructor(public service : CommonService){
+    this.msg = "";
+  }
+
+  ionViewWillEnter(){
+    this.service.getSomething("5cc7a9f1eb8ee176c9c56f95").subscribe(res => this.msg += res.msg);
+  }
+
+}
